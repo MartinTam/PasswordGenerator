@@ -1,2 +1,2 @@
 # PasswordGenerator
-Desktop application to generate passwords
+I'm working on it...
