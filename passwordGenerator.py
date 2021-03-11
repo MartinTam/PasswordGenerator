@@ -38,8 +38,29 @@ lengthTitle = Label(root, text = 'Length: ').grid(row = 2, column = 0, columnspa
 lengthScale = Scale(root, from_ = 1, to = 100, orient = HORIZONTAL)
 lengthScale.grid(row = 3, column = 0, columnspan = 4)
 
+# For clearing the previous generated password on the screen
+password = Label(root)
+
+def generator():
+
+    # Clear the previous generated password on the screen
+    global password
+    password.destroy()
+
+    # Lists of characters 
+    lowerCases = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+    upperCases = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    specialCharacters = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '>', '=', '?', '@', '[', ']', '\\', '^', '_', '`', '{', '}', '|', '~']
+
+    allCases = [lowerCases, upperCases, numbers, specialCharacters]
+
+    # Show the password
+    password = Label(root, text = ',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,')
+    password.grid(row = 5, column = 0, columnspan = 4)
+
 # Generate Button
-generateButton = Button(root, text = 'Generate', fg = 'white', bg = 'green').grid(row = 4, column = 0, columnspan = 4, pady = 40)
+generateButton = Button(root, text = 'Generate', fg = 'white', bg = 'green', command = generator).grid(row = 4, column = 0, columnspan = 4, pady = 40)
 
 # ---------------------------------------------------------
 root.mainloop()
