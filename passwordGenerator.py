@@ -2,12 +2,12 @@ from tkinter import *
 import random
 
 root = Tk()
-root.geometry('610x500')
+root.geometry('1250x500')
 root.title('Password Generator')
 # ---------------------------------------------------------
 
 # Title
-title = Label(root, text = 'Password Generator', font = ('Comicsans', 20)).grid(row = 0, column = 0, columnspan = 4, pady = 30)
+title = Label(root, text = 'Password Generator', font = ('Comicsans', 20)).grid(row = 0, column = 0, columnspan = 4, pady = 50)
 
 # Lower Case
 lowerCaseVar = StringVar()
@@ -38,9 +38,12 @@ lengthTitle = Label(root, text = 'Length: ').grid(row = 2, column = 0, columnspa
 lengthScale = Scale(root, from_ = 1, to = 100, orient = HORIZONTAL)
 lengthScale.grid(row = 3, column = 0, columnspan = 4)
 
-# For clearing the previous generated password on the screen
-password = Label(root)
+# Entry Box to show the password
+password = Entry(root, width = 150)
+password.grid(row = 5, column = 0, columnspan = 4, padx = 20)
 
+
+# Check user choices
 def checkBoxOn():
     onset = []
     if lowerCaseVar.get() == 'On':
@@ -54,12 +57,8 @@ def checkBoxOn():
     
     return onset
 
-
+# Generate the password
 def generator():
-
-    # Clear the previous generated password on the screen
-    global password
-    password.destroy()
 
     # Lists of characters 
     lowerCases = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -71,17 +70,21 @@ def generator():
 
     generatedPassword = ''
 
-    for x in range(0, lengthScale.get()):
-        
-        userChoice = checkBoxOn()
-        randomList = random.choice(userChoice)
+    # Try to generate the password
+    try:
+        for x in range(0, lengthScale.get()):
+            
+            userChoice = checkBoxOn()
+            randomList = random.choice(userChoice)
 
-        randomChar = allCases[randomList][random.randint(0, len( allCases[randomList] ) - 1 )]
-        generatedPassword += randomChar 
+            randomChar = allCases[randomList][random.randint(0, len( allCases[randomList] ) - 1 )]
+            generatedPassword += randomChar 
+    except:
+        pass
 
     # Show the password
-    password = Label(root, text = generatedPassword)
-    password.grid(row = 5, column = 0, columnspan = 4)
+    password.delete(0, END)
+    password.insert(0, generatedPassword)
 
 # Generate Button
 generateButton = Button(root, text = 'Generate', fg = 'white', bg = 'green', command = generator).grid(row = 4, column = 0, columnspan = 4, pady = 40)
