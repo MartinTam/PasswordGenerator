@@ -41,6 +41,20 @@ lengthScale.grid(row = 3, column = 0, columnspan = 4)
 # For clearing the previous generated password on the screen
 password = Label(root)
 
+def checkBoxOn():
+    onset = []
+    if lowerCaseVar.get() == 'On':
+        onset.append(0)
+    if upperCaseVar.get() == 'On':
+        onset.append(1)
+    if numbersVar.get() == 'On':
+        onset.append(2)
+    if specialCharVar.get() == 'On':
+        onset.append(3)
+    
+    return onset
+
+
 def generator():
 
     # Clear the previous generated password on the screen
@@ -58,7 +72,10 @@ def generator():
     generatedPassword = ''
 
     for x in range(0, lengthScale.get()):
-        randomList = random.randint(0,3)
+        
+        userChoice = checkBoxOn()
+        randomList = random.choice(userChoice)
+
         randomChar = allCases[randomList][random.randint(0, len( allCases[randomList] ) - 1 )]
         generatedPassword += randomChar 
 
